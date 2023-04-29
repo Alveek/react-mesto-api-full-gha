@@ -1,0 +1,15 @@
+.card__items {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 282px));
+  justify-content: center;
+  gap: 20px 17px;
+}
+
+
+@media screen and (max-width: 620px) {
+  .card__items {
+    grid-template-columns: calc(100vw - 38px);
+  }
+}

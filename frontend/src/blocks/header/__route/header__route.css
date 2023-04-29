@@ -1,0 +1,15 @@
+.header__route {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.header__route:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 425px) {
+  .header__route {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

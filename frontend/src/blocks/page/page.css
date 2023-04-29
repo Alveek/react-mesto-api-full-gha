@@ -1,0 +1,38 @@
+.page {
+  box-sizing: border-box;
+  background-color: #000000;
+  padding: 0 19px;
+  display: grid;
+  grid-template-columns: minmax(max-content, 880px);
+  grid-template-rows: min-content auto min-content;
+  min-height: 100vh;
+  justify-content: center;
+  font-family: "Inter", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input[data-autocompleted] {
+  background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 0 19px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    padding-bottom: 36px;
+  }
+}

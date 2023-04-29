@@ -1,0 +1,19 @@
+.header {
+  padding: 43px 0;
+  border-bottom: 1px solid #545454;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 28px 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    flex-direction: column-reverse;
+  }
+}

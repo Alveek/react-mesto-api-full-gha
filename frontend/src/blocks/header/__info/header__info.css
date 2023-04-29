@@ -1,0 +1,22 @@
+.header__info {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  display: flex;
+  gap: 24px;
+  transition: all .2s linear;
+}
+
+@media screen and (max-width: 430px) {
+  .header__info {
+    width: 100%;
+    text-align: center;
+    flex-direction: column;
+    padding: 12px 0 40px;
+    border-bottom: 1px solid #545454;
+    gap: 18px;
+    display: none;
+  }
+}
