@@ -78,9 +78,8 @@ class Api {
 }
 
 export const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-58",
+  url: "https://api.alveek.nomoredomains.monster",
   headers: {
-    authorization: "2cf1ae4c-ba37-45f7-aec7-ad1edf235188",
     "Content-Type": "application/json",
   },
 });
