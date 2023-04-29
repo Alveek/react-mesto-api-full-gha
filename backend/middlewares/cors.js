@@ -1,4 +1,10 @@
-const { allowedCors } = require('../utils/constants');
+const allowedCors = [
+  'http://alveek.nomoredomains.monster',
+  'https://alveek.nomoredomains.monster',
+  'http://api.alveek.nomoredomains.monster',
+  'https://api.alveek.nomoredomains.monster',
+  'localhost:3000',
+];
 
 module.exports = (req, res, next) => {
   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
