@@ -10,9 +10,8 @@
 
 ## Ссылки на проект
 
-IP-адрес:
-158.160.18.179
+IP 158.160.18.179
 
-Frontend https://alveek.nomoredomains.monster/
+https://alveek.nomoredomains.monster
 
-Backend https://api.alveek.nomoredomains.monster/
+https://api.alveek.nomoredomains.monster
