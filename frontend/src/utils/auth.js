@@ -44,5 +44,5 @@ class Api {
 }
 
 export const auth = new Api({
-  url: 'http://localhost:3001',
+  url: 'https://api.alveek.nomoredomains.monster',
 });
