@@ -24,6 +24,7 @@ const createCard = (req, res, next) => {
   Card.create({ name, link, owner: _id })
     .then((newCard) => {
       res.send(newCard);
+      console.log;
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
@@ -59,6 +60,7 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: owner } },
     { new: true, runValidators: true }
   )
+    .populate(['owner', 'likes'])
     .then((card) => checkCard(card, res))
     .catch(next);
 };
@@ -72,6 +74,7 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: owner } },
     { new: true, runValidators: true }
   )
+    .populate(['owner', 'likes'])
     .then((card) => checkCard(card, res))
     .catch(next);
 };

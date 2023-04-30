@@ -5,6 +5,7 @@ const allowedCors = [
   'https://api.alveek.nomoredomains.monster',
   'localhost:3000',
   'http://localhost:3000',
+  'http://localhost:3001',
 ];
 
 module.exports = (req, res, next) => {
