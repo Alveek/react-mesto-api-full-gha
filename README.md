@@ -12,6 +12,6 @@
 
 IP 158.160.18.179
 
-https://alveek.nomoredomains.monster
+Frontend https://alveek.nomoredomains.monster
 
-https://api.alveek.nomoredomains.monster
+Backend https://api.alveek.nomoredomains.monster
