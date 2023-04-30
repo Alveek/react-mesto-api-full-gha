@@ -1,20 +1,20 @@
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
-import ProtectedRouteElement from "./ProtectedRoute";
-import Login from "./Login";
-import Register from "./Register";
-import { api } from "../utils/api";
-import { auth } from "../utils/auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import { useEffect, useState } from "react";
-import ImagePopup from "./ImagePopup";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ConfirmationPopup from "./ConfirmationPopup";
-import InfoTooltip from "./InfoTooltip";
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import ProtectedRouteElement from './ProtectedRoute';
+import Login from './Login';
+import Register from './Register';
+import { api } from '../utils/api';
+import { auth } from '../utils/auth';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import { useEffect, useState } from 'react';
+import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ConfirmationPopup from './ConfirmationPopup';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -27,24 +27,24 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState([]);
   const [dataIsLoaded, setDataIsLoaded] = useState(false);
-  const [dataLoadingError, setDataLoadingError] = useState("");
+  const [dataLoadingError, setDataLoadingError] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [err, setErr] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth
         .checkToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate("/");
-            setEmail(res.data.email);
+            navigate('/');
+            setEmail(res.email);
           }
         })
         .catch((err) => console.log(err));
@@ -52,8 +52,8 @@ function App() {
   }, []);
 
   const handleSignOut = () => {
-    setEmail("");
-    localStorage.removeItem("jwt");
+    setEmail('');
+    localStorage.removeItem('jwt');
   };
 
   useEffect(() => {
@@ -61,12 +61,11 @@ function App() {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([user, cards]) => {
           setCurrentUser(user);
-          setCards(cards);
+          setCards(cards.reverse());
           setDataIsLoaded(true);
         })
         .catch((err) => {
           setDataLoadingError(`Что-то пошло не так... (${err})`);
-          console.log(err);
         });
   }, [loggedIn]);
 
@@ -79,7 +78,7 @@ function App() {
       .then((res) => {
         setErr(false);
         setIsInfoTooltipOpen((prev) => !prev);
-        navigate("/sign-in", { replace: true });
+        navigate('/sign-in', { replace: true });
       })
       .catch((err) => {
         setErr(true);
@@ -97,9 +96,9 @@ function App() {
       .then((data) => {
         if (data.token) {
           setLoggedIn(true);
-          localStorage.setItem("jwt", data.token);
+          localStorage.setItem('jwt', data.token);
           setEmail(values.email);
-          navigate("/");
+          navigate('/');
         }
       })
       .catch((err) => {

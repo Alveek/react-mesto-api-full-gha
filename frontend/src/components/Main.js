@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import iconPencil from "../images/icon-pencil.svg";
-import Card from "./Card";
-import Loader from "./Loader";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import iconPencil from '../images/icon-pencil.svg';
+import Card from './Card';
+import Loader from './Loader';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({
   onEditProfile,

@@ -25,7 +25,7 @@ class Api {
 
   editProfile(data) {
     return fetch(`${this._url}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -36,7 +36,7 @@ class Api {
 
   addNewCard(card) {
     return fetch(`${this._url}/cards`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({
         name: card.name,
         link: card.link,
@@ -47,7 +47,7 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
@@ -55,12 +55,12 @@ class Api {
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
       return fetch(`${this._url}/cards/${cardId}/likes`, {
-        method: "PUT",
+        method: 'PUT',
         headers: this._headers,
       }).then((res) => this._checkResponse(res));
     } else {
       return fetch(`${this._url}/cards/${cardId}/likes`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: this._headers,
       }).then((res) => this._checkResponse(res));
     }
@@ -68,7 +68,7 @@ class Api {
 
   updateAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -78,8 +78,9 @@ class Api {
 }
 
 export const api = new Api({
-  url: "https://api.alveek.nomoredomains.monster",
+  url: 'http://localhost:3001',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem('jwt')}` || '',
   },
 });

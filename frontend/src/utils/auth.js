@@ -37,12 +37,12 @@ class Api {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     }).then((res) => this.checkResponse(res));
   };
 }
 
 export const auth = new Api({
-  url: 'https://api.alveek.nomoredomains.monster',
+  url: 'http://localhost:3001',
 });
