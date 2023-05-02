@@ -34,6 +34,7 @@ function App() {
   const [err, setErr] = useState(false);
 
   const navigate = useNavigate();
+
   const api = new Api({
     url: 'https://api.alveek.nomoredomains.monster',
     headers: {
@@ -41,8 +42,6 @@ function App() {
       authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   });
-
-  // console.log(api);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -59,7 +58,7 @@ function App() {
         .catch((err) => console.log(err));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, []);
 
   const handleSignOut = () => {
     setLoggedIn(false);
@@ -107,7 +106,6 @@ function App() {
       .authorize(values.email, values.password)
       .then((data) => {
         if (data.token) {
-          console.log('before', { loggedIn });
           localStorage.setItem('jwt', data.token);
           setEmail(values.email);
           setLoggedIn(true);

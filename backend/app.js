@@ -18,6 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
 app.use(cors);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(authRouter);
 app.use(auth);
 app.use(router);
@@ -42,5 +49,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`start server on port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });
