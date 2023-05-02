@@ -2,7 +2,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRouteElement from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
-import { api } from '../utils/api';
+import Api from '../utils/api';
 import { auth } from '../utils/auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
@@ -34,6 +34,15 @@ function App() {
   const [err, setErr] = useState(false);
 
   const navigate = useNavigate();
+  const api = new Api({
+    url: 'https://api.alveek.nomoredomains.monster',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    },
+  });
+
+  // console.log(api);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -49,9 +58,11 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   const handleSignOut = () => {
+    setLoggedIn(false);
     setEmail('');
     localStorage.removeItem('jwt');
   };
@@ -67,6 +78,7 @@ function App() {
         .catch((err) => {
           setDataLoadingError(`Что-то пошло не так... (${err})`);
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   const handleRegister = (values) => {
@@ -95,9 +107,10 @@ function App() {
       .authorize(values.email, values.password)
       .then((data) => {
         if (data.token) {
-          setLoggedIn(true);
+          console.log('before', { loggedIn });
           localStorage.setItem('jwt', data.token);
           setEmail(values.email);
+          setLoggedIn(true);
           navigate('/');
         }
       })

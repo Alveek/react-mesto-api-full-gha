@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   constructor({ url, headers }) {
     this._url = url;
     this._headers = headers;
@@ -76,11 +76,3 @@ class Api {
     }).then((res) => this._checkResponse(res));
   }
 }
-
-export const api = new Api({
-  url: 'https://api.alveek.nomoredomains.monster',
-  headers: {
-    'Content-Type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('jwt')}` || '',
-  },
-});
