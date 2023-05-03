@@ -15,32 +15,43 @@ const checkUser = (user, res) => {
 };
 
 const createUser = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10).then((hash) => {
-    User.create({
-      email: req.body.email,
-      password: hash,
-      name: req.body.name,
-      about: req.body.about,
-      avatar: req.body.avatar,
-    })
-      .then((newUser) => {
-        res.status(201).send({
-          email: newUser.email,
-          name: newUser.name,
-          about: newUser.about,
-          avatar: newUser.avatar,
-        });
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hash) => {
+      User.create({
+        email: req.body.email,
+        password: hash,
+        name: req.body.name,
+        about: req.body.about,
+        avatar: req.body.avatar,
       })
-      .catch((error) => {
-        if (error.code === 11000) {
-          next(
-            new customError.Conflict(
-              'Пользователь с такой почтой уже зарегистрирвован'
-            )
-          );
-        }
-      });
-  });
+        .then((newUser) => {
+          res.status(201).send({
+            email: newUser.email,
+            name: newUser.name,
+            about: newUser.about,
+            avatar: newUser.avatar,
+          });
+        })
+        .catch((error) => {
+          if (error.code === 11000) {
+            next(
+              new customError.Conflict(
+                'Пользователь с такой почтой уже зарегистрирвован'
+              )
+            );
+          } else if (error.name === 'ValidationError') {
+            next(
+              new customError.BadRequest(
+                'Некорректные данные при создании нового пользователя'
+              )
+            );
+          } else {
+            next(error);
+          }
+        });
+    })
+    .catch(next);
 };
 
 const login = (req, res, next) => {
@@ -54,7 +65,9 @@ const login = (req, res, next) => {
       }
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          next(new customError.Unauthorized('Неверные почта или пароль'));
+          return next(
+            new customError.Unauthorized('Неверные почта или пароль')
+          );
         }
         const token = jwt.sign(
           { _id: user._id },
@@ -72,7 +85,17 @@ const login = (req, res, next) => {
 const getMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((error) => {
+      if (error.name === 'ValidationError') {
+        next(
+          new customError.BadRequest(
+            'Некорректные данные при создании нового пользователя'
+          )
+        );
+      } else {
+        next(error);
+      }
+    });
 };
 
 const getUsers = (req, res, next) => {
@@ -86,9 +109,7 @@ const getUserById = (req, res, next) => {
 
   User.findById(userId)
     .then((user) => checkUser(user, res))
-    .catch((error) => {
-      next(error);
-    });
+    .catch(next);
 };
 
 const editProfile = (req, res, next) => {
@@ -101,7 +122,17 @@ const editProfile = (req, res, next) => {
     { new: true, runValidators: true }
   )
     .then((user) => checkUser(user, res))
-    .catch(next);
+    .catch((error) => {
+      if (error.name === 'ValidationError') {
+        next(
+          new customError.BadRequest(
+            'Некорректные данные при создании нового пользователя'
+          )
+        );
+      } else {
+        next(error);
+      }
+    });
 };
 
 const updateAvatar = (req, res, next) => {
@@ -110,7 +141,17 @@ const updateAvatar = (req, res, next) => {
 
   User.findByIdAndUpdate(owner, avatar, { new: true, runValidators: true })
     .then((user) => checkUser(user, res))
-    .catch(next);
+    .catch((error) => {
+      if (error.name === 'ValidationError') {
+        next(
+          new customError.BadRequest(
+            'Некорректные данные при создании нового пользователя'
+          )
+        );
+      } else {
+        next(error);
+      }
+    });
 };
 
 module.exports = {

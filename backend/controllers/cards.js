@@ -32,8 +32,9 @@ const createCard = (req, res, next) => {
             'Переданы некорректные данные при создании карточки.'
           )
         );
+      } else {
+        next(error);
       }
-      next(error);
     });
 };
 
