@@ -3,6 +3,8 @@ const allowedCors = [
   'https://alveek.nomoredomains.monster',
   'http://api.alveek.nomoredomains.monster',
   'https://api.alveek.nomoredomains.monster',
+  'http://mesto.alveek.xyz',
+  'http://mesto.alveek.xyz',
   'localhost:3000',
   'http://localhost:3000',
   'http://localhost:3001',
