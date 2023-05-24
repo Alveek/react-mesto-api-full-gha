@@ -44,5 +44,5 @@ class Api {
 }
 
 export const auth = new Api({
-  url: 'https://api.alveek.nomoredomains.monster',
+  url: 'https://api.mesto.alveek.xyz',
 });

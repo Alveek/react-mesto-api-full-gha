@@ -36,7 +36,7 @@ function App() {
   const navigate = useNavigate();
 
   const api = new Api({
-    url: 'https://api.alveek.nomoredomains.monster',
+    url: 'https://api.mesto.alveek.xyz',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${localStorage.getItem('jwt')}`,
