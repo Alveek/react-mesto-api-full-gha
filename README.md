@@ -12,6 +12,6 @@
 
 IP 158.160.18.179
 
-Frontend https://alveek.nomoredomains.monster
+Frontend https://mesto.alveek.xyz
 
-Backend https://api.alveek.nomoredomains.monster
+Backend https://api.mesto.alveek.xyz
